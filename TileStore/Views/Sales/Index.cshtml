@@ -1,0 +1,107 @@
+﻿@model TileStore.Models.Invoice
+
+<div style="padding: 75px; background-image: url('../../Content/texture2.jpg');" class="shadow">
+    <h2>Welcome to the Sales Counter</h2>
+
+    <form action="@Url.Action("GenerateToken")" method="post" style="display:none" id="mainform"></form>
+
+
+    <div style="width:33%; margin:auto">
+        <div class="form-group">
+            @Html.DropDownList("ItemId", null, "Select an item", new { @class = "form-control", required = "required", form = "mainform" })
+        </div>
+    </div>
+
+    <table class="table table-hover table-striped" id="table-item-details">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+    <br />
+    <br />
+
+    <hr />
+
+    <h2>Purchase Item</h2>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Quantity</label>
+            <input class="form-control" type="number" min="1" step="1" required name="quantity" id="quantity" form="mainform" />
+        </div>
+        <div class="form-group">
+            <label>Total Price</label>
+            <input class="form-control" type="number" min="1" step="0.01" required readonly id="totalprice" />
+        </div>
+
+    </div>
+
+
+    <br />
+    <br />
+
+    <hr />
+
+    <h2>Negotiate</h2>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Final Price</label>
+            <input class="form-control" type="number" min="1" step="0.01" required id="finalprice" name="finalprice" form="mainform" />
+        </div>
+        <div class="form-group">
+            <label>Bill To</label>
+            <input class="form-control" type="text" min="1" step="0.01" required id="billto" name="billto" form="mainform" />
+        </div>
+    </div>
+
+    <br />
+    <input type="submit" class="btn btn-primary" value="Confirm" form="mainform" />
+
+
+    @section Scripts
+{
+        <script>
+    $('#ItemId').change(function () {
+        $.ajax({
+            url: '@Url.Action("GetItemDetails")',
+            data: {
+                'id': $(this).val()
+            },
+            success: function (response) {
+                $('#table-item-details tbody tr td:first-child').html(response['Name']);
+                $('#table-item-details tbody tr td:nth-child(2)').html(response['Price']);
+            },
+            error: function (err) {
+                console.log('JSON Failed.');
+                console.log(err);
+            }
+        })
+    });
+
+    $('#quantity').change(function () {
+        $('#totalprice').val($('#table-item-details tbody tr td:nth-child(2)').html() * $(this).val());
+    })
+
+
+        </script>
+    }
+
+
+    <br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br />
+</div>

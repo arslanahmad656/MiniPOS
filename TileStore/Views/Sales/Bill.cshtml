@@ -1,0 +1,49 @@
+﻿@model TileStore.Models.Invoice
+
+<div class="shadow" style="background-image: url('../../Content/texture2.jpg');">
+    <div style="margin-top:25%">
+        <form class="form-horizontal" action="@Url.Action("GenerateBill")" method="post">
+            <input type="hidden" id="InvoiceId" name="InvoiceId" value="@Model.Id" />
+            <div class="form-group">
+                <label class="control-label col-md-2 text-right">Amount Payable</label>
+                <div class="col-md-6">
+                    <input class="form-control" value="@Model.PaidPrice" readonly id="amountpayable" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 text-right">Cash Payed</label>
+                <div class="col-md-6">
+                    <input class="form-control" name="cashpayed" id="cashpayed" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 text-right">Amount Payable</label>
+                <div class="col-md-6">
+                    <input class="form-control" readonly name="cashreturned" id="cashreturned" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-6">
+                    <input class="btn btn-primary" value="Cash" type="submit" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script>
+        $('#cashpayed').change(function () {
+            var payable = $('#amountpayable').val();
+            var paid = $(this).val();
+            var returned = paid - payable;
+
+            $('#cashreturned').val(returned);
+        })
+    </script>
+}

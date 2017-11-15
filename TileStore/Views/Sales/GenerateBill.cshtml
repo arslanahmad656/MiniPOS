@@ -1,0 +1,38 @@
+﻿@model TileStore.Models.Bill
+    @{ 
+        var invoice = (TileStore.Models.Invoice)ViewBag.Invoice;
+        var productName = (string)ViewBag.ProductName;
+    }
+
+<div class="shadow" style="padding: 20px; background-image: url('../../Content/texture3.jpg');">
+    <h2>Cash Received</h2>
+
+    <h3>Bill has been generated with the follwoing details:</h3>
+
+    <dl class="dl-horizontal">
+        <dt>Invoice Number</dt>
+        <dd>@Model.InvoiceId</dd>
+
+        <dt>Product Name</dt>
+        <dd>@productName</dd>
+
+        <dt>Bill To</dt>
+        <dd>@invoice.BillTo</dd>
+
+        <dt>Amount Payable</dt>
+        <dd>@invoice.PaidPrice</dd>
+
+        <dt>Cash Payed</dt>
+        <dd>@Model.ReceivedCash</dd>
+
+        <dt>Cash Returned</dt>
+        <dd>@Model.ReturnedCash</dd>
+    </dl>
+
+    <br />
+    <hr />
+
+    <p class="text-right">
+        Dated: <span class="text-muted">@invoice.Date</span>
+    </p>
+</div>

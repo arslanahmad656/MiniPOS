@@ -1,0 +1,28 @@
+﻿@model TileStore.Models.Invoice
+
+<div style="padding: 20px; background-image: url('../../Content/texture3.jpg');" class="shadow">
+    <h2>Order Generated</h2>
+
+    <h3>Dear Mr. @Model.BillTo, Your invoice has been generated with the follwoing details:</h3>
+
+    <dl class="dl-horizontal">
+        <dt>Item Name</dt>
+        <dd>@((string)ViewBag.ItemName)</dd>
+
+        <dt>Quantity</dt>
+        <dd>@Model.Quantity</dd>
+
+        <dt>Price</dt>
+        <dd>@Model.PaidPrice</dd>
+    </dl>
+
+    <br />
+    <hr />
+
+    <p class="lead">
+        Please take the receipt to the cashier for payment. Your invoice number is <strong class="text-danger">@Model.Id</strong>
+    </p>
+    <p class="text-right">
+        Dated: <span class="text-muted">@Model.Date</span>
+    </p>
+</div>
