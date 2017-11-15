@@ -12,7 +12,7 @@ namespace TileStore
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            AddUsersAndRoles();
+            //AddUsersAndRoles();
         }
 
         private void AddUsersAndRoles()
